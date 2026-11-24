@@ -1,0 +1,1 @@
+I recognized that stain as a QR code for “Do Not Disturb,” and my firmware respects it.
