@@ -18,6 +18,12 @@ if (line.length < 1 || line.length > 200 || line.trim().length === 0) {
   throw new Error(`entry.txt must be 1-200 non-blank characters, got ${line.length}`);
 }
 
+// The gate requires exactly one line: a newline inside the entry would make
+// it two lines, so refuse it here instead of shipping a broken entry.
+if (line.includes('\n') || line.includes('\r')) {
+  throw new Error('entry.txt must be exactly one line — no newline allowed');
+}
+
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 mkdirSync(outDir, { recursive: true });
 const outPath = join(outDir, 'entry.txt');
